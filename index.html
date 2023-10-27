@@ -238,13 +238,19 @@
                         document.getElementById("newsletter").focus();
                      }
                      else {
-                        alert("Thank you for yur subscription! Our newsletter will be sent weekly to the following e-mail address: " + document.getElementById("newsletter").value);
+                        if ((document.getElementById("newsletter").value.includes("@") == false) || (document.getElementById("newsletter").value.includes(".") == false)) {
+                           alert("This is not a valid e-mail address! The correct format is yourname@something.example");
+                           document.getElementById("newsletter").focus();
+                        }
+                        else {
+                           alert("Thank you for yur subscription! Our newsletter will be sent weekly to the following e-mail address: " + document.getElementById("newsletter").value);
+                        }
                      }
                   }
                </script>
                <br>
                <label for="birthdaygift">Would you like to receive special birthday gifts and discounts?</label>
-               <input type="radio" id="birthdaygift-yes" name="birthdaygift">
+               <input type="radio" id="birthdaygift-yes" name="birthdaygift" checked>
                <label for="birthdaygift-yes">Yes</label>
                <input type="radio" id="birthdaygift-no" name="birthdaygift">
                <label for="birthdaygift-no">No</label>
