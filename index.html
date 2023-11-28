@@ -50,6 +50,25 @@
             </div>
             <div class="col-md-6">
                <p class="welcome-title">Bath bombs made with love</p>
+               <script> 
+                  document.addEventListener("DOMContentLoaded", function () {
+                     const welcomeTitle = document.querySelector(".welcome-title");
+
+                     welcomeTitle.addEventListener("mouseenter", function () {
+                        const currentSize = parseInt(window.getComputedStyle(welcomeTitle).fontSize);
+                        const newSize = currentSize * 1.2;
+
+                        welcomeTitle.style.fontSize = newSize + "px";
+                     });
+
+                     welcomeTitle.addEventListener("mouseleave", function () {
+                        const currentSize = parseInt(window.getComputedStyle(welcomeTitle).fontSize);
+                        const newSize = currentSize / 1.2;
+
+                        welcomeTitle.style.fontSize = newSize + "px";
+                     });
+                  });
+               </script>
                <p>Dive into the fun world of our homemade bath bombs! These little wonders turn your bath into a
                   colorful,
                   fragrant adventure while treating your skin to some extra love.
@@ -274,38 +293,83 @@
                   });
                </script>
             </div>
-            <div class="col-md-4 bombs">
-               <label for="colorWell">Change the color of the text:
-               </label>
-               <hr>
-               <input type="color" value="#ff0000" id="colorWell" />
-               <script>
-                  let colorWell;
-                  const defaultColor = "#0000ff";
+            <script>
+               document.addEventListener("DOMContentLoaded", function () {
+                  const body = document.body;
+                  const welcomeTitle = document.querySelector(".welcome-title");
 
-                  window.addEventListener("load", startup, false);
-                  function startup() {
-                     colorWell = document.querySelector("#colorWell");
-                     colorWell.value = defaultColor;
-                     colorWell.addEventListener("input", updateFirst, false);
-                     colorWell.addEventListener("change", updateAll, false);
-                     colorWell.select();
+                  function updateColors(textColor, bgColor) {
+                     welcomeTitle.style.color = textColor;
+                     body.style.backgroundColor = bgColor;
                   }
-                  function updateFirst(event) {
-                     const p = document.querySelector("p");
-                     if (p) {
-                        p.style.color = event.target.value;
-                     }
-                  }
-                  function updateAll(event) {
-                     document.querySelectorAll("p").forEach((p) => {
-                        p.style.color = event.target.value;
-                     });
-                  }
-               </script>
+
+                  document.getElementById("colorForm").addEventListener("submit", function (event) {
+                     event.preventDefault();
+
+                     const textColor = document.getElementById("textColor").value;
+                     const bgColor = document.getElementById("bgColor").value;
+
+                     updateColors(textColor, bgColor);
+                  });
+               });
+            </script>
+            <div class="col-md-4 bombs">
+               <label for="birthdate">Choose your style: </label>
+               <form id="colorForm">
+                  <div>
+                     <label for="textColor">Select text color:</label>
+                     <input type="color" id="textColor" value="#000000">
+                  </div>
+                  <label for="bgColor">Select background color:</label>
+                  <input type="color" id="bgColor" value="#ffffff">
+                  <div>
+                     <button type="submit">Apply Colors</button>
+                  </div>
+               </form>
             </div>
          </div>
       </div>
+
+      <script>
+         document.addEventListener("DOMContentLoaded", function () {
+            const body = document.body;
+            const welcomeTitle = document.querySelector(".welcome-title");
+
+            function updateColors(textColor, bgColor) {
+               welcomeTitle.style.color = textColor;
+               body.style.backgroundColor = bgColor;
+            }
+
+            document.getElementById("colorForm").addEventListener("submit", function (event) {
+               event.preventDefault(); 
+
+               const textColor = document.getElementById("textColor").value;
+               const bgColor = document.getElementById("bgColor").value;
+
+               updateColors(textColor, bgColor);
+            });
+
+            const allImages = document.querySelectorAll("img");
+
+            function changeImageBorders() {
+               allImages.forEach((img) => {
+                  const randomColor = getRandomColor();
+                  img.style.border = `3px solid ${randomColor}`;
+               });
+            }
+
+            document.body.addEventListener("click", changeImageBorders);
+
+            function getRandomColor() {
+               const letters = "0123456789ABCDEF";
+               let color = "#";
+               for (let i = 0; i < 6; i++) {
+                  color += letters[Math.floor(Math.random() * 16)];
+               }
+               return color;
+            }
+         });
+      </script>
    </section>
 </body>
 

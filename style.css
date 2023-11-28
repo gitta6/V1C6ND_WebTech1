@@ -23,7 +23,7 @@ body {
 .navbar-brand img {
 
     height: 80px;
-    padding-left: 30px;
+    padding: 5px;
     background-image: none;
 
 }
